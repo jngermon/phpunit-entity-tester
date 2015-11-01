@@ -1,0 +1,21 @@
+{
+    "name": "jngermon/phpunit-entity-tester",
+    "type": "project",
+    "description": "Quickly test your entities",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jean-Noël Germon",
+            "email": "jn.germon@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "phpunit/phpunit": "~4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpUnitEntityTester\\": "src/"
+        }
+    }
+}
