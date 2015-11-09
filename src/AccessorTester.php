@@ -4,6 +4,8 @@ namespace PhpUnitEntityTester;
 
 class AccessorTester extends \PhpUnit_Framework_TestCase
 {
+    const USE_SET_DATA = 'USE_SET_DATA';
+
     protected $entity;
     protected $attribute;
     protected $fluent;
@@ -44,9 +46,9 @@ class AccessorTester extends \PhpUnit_Framework_TestCase
         return $this;
     }
 
-    public function test($setData, $getData = null)
+    public function test($setData, $getData = self::USE_SET_DATA)
     {
-        $getData = $getData ?: $setData;
+        $getData = $getData == self::USE_SET_DATA ? $setData : $getData;
 
         $this->testSetter($setData);
         $this->testGetter($getData);
