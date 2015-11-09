@@ -5,3 +5,6 @@ docker-compose.env
 
 /build
 
+*.swp
+*.swo
+
