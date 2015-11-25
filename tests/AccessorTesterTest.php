@@ -7,27 +7,36 @@ use PhpUnitEntityTester\Fixtures\Entity\Entity;
 
 class AccessorTesterTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSimple()
+    protected $accessorTester;
+
+    public function setup()
     {
         $entity = new Entity(); 
 
-        $nameTester = new AccessorTester($entity, 'name');
-        $nameTester->test('foo')
-            ->fluent(false)
-            ->setterMethod('setNameNotFluent')
+        $this->accessorTester = new AccessorTester($entity, 'name');
+    }
+
+    public function testSimple()
+    {
+        $this->accessorTester->test('foo')
             ->test('bar')
             ;
     }
 
-    public function testNotFluentAndSetterMethod()
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedExceptionMessage The method 'setNameNotFluent' is not fluent.
+     */
+    public function testSetFluent()
     {
-        $entity = new Entity(); 
+        $this->accessorTester->setterMethod('setNameNotFluent')
+            ->test('foo');
+    }
 
-        $nameTester = new AccessorTester($entity, 'name');
-        $nameTester->fluent(false)
-            ->setterMethod('setNameNotFluent')
-            ->test('foo')
-            ;
+    public function testSetNotFluent()
+    {
+        $this->accessorTester->fluent(false)
+            ->test('foo');
     }
 
     public function testGetterSpecial()

@@ -2,9 +2,13 @@
 
 namespace PhpUnitEntityTester;
 
-class AccessorTester extends \PhpUnit_Framework_TestCase
+use \PhpUnit_Framework_TestCase as Testcase;
+
+class AccessorTester
 {
     const USE_SET_DATA = 'USE_SET_DATA';
+
+    public static $MSG_SETTER_METHOD_NOT_FLUENT = "The method '%setterMethod%' is not fluent.";
 
     protected $entity;
     protected $attribute;
@@ -60,20 +64,39 @@ class AccessorTester extends \PhpUnit_Framework_TestCase
     {
         $setterMethod = $this->setterMethod;
 
-        $this->assertEquals(
-            $this->fluent ? $this->entity : null,
-            $this->entity->$setterMethod($data)
-        );
+        $returnOfSetter = $this->entity->$setterMethod($data);
+
+        if ($this->fluent) {
+            TestCase::assertEquals(
+                $this->entity,
+                $returnOfSetter,
+                $this->msg(self::$MSG_SETTER_METHOD_NOT_FLUENT)
+            );
+        }
     }
 
     private function testGetter($data)
     {
         $getterMethod = $this->getterMethod;
 
-        $this->assertEquals(
+        TestCase::assertEquals(
             $data,
             $this->entity->$getterMethod()
         );
+    }
+
+    private function msg($msg)
+    {
+        $replaces = [
+            '%setterMethod%' => $this->setterMethod,
+            '%getterMethod%' => $this->getterMethod
+        ];
+
+        foreach ($replaces as $key => $value) {
+            $msg = str_replace($key, $value, $msg);
+        }
+
+        return $msg;
     }
 }
 
