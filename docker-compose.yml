@@ -7,8 +7,8 @@ data:
         - .home-developer:/home/developer
         - $SSH_AUTH_SOCK:/tmp/agent.sock
 
-appserver:
-    image: greg0ire/php
+console:
+    image: greg0ire/php-console
     volumes_from:
         - data
     env_file:
