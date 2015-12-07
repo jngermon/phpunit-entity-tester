@@ -27,5 +27,10 @@ class Entity
     {
         return $this->name . 'Special';
     }
+
+    public function badGetMethod()
+    {
+        return $this->name . 'wrong_data';
+    }
 }
 

@@ -9,6 +9,7 @@ class AccessorTester
     const USE_SET_DATA = 'USE_SET_DATA';
 
     public static $MSG_SETTER_METHOD_NOT_FLUENT = "The method '%setterMethod%' is not fluent.";
+    public static $MSG_GETTER_METHOD_BAD_RETURN = "The method '%getterMethod%' does not return the good value.";
 
     protected $entity;
     protected $attribute;
@@ -81,7 +82,8 @@ class AccessorTester
 
         TestCase::assertEquals(
             $data,
-            $this->entity->$getterMethod()
+            $this->entity->$getterMethod(),
+            $this->msg(self::$MSG_GETTER_METHOD_BAD_RETURN)
         );
     }
 

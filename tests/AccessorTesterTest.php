@@ -48,5 +48,15 @@ class AccessorTesterTest extends \PHPUnit_Framework_TestCase
             ->test('foo', 'fooSpecial')
             ;
     }
+
+    /**
+     * @expectedException \PHPUnit_Framework_AssertionFailedError
+     * @expectedExceptionMessage The method 'badGetMethod' does not return the good value.
+     */
+    public function testBadGetMethod()
+    {
+        $this->accessorTester->getterMethod('badGetMethod')
+            ->test('foo');
+    }
 }
 
