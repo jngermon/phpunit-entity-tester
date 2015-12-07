@@ -82,6 +82,20 @@ use the second argument of the `test` method like this :
 $tester->test('value for setter', 'value that the getter have to return');
 ```
 
+##### Test Setter
+You can also only test the setter method like that :
+```php
+$tester->testSetter('value');
+```
+This method calls the setter method and tests the fluent constraint
+
+##### Test Getter
+You can also only test the setter method like that :
+```php
+$tester->testGetter('value');
+```
+This method calls the getter method and tests the return with value in parameter
+
 ### Test the adders, removers and collection getters
  
 #### 1. Add 'use' statement
