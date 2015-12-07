@@ -163,6 +163,9 @@ This method tests if the returned value of the getter method is :
 To test entity quicker, use `dataProvider` with tester.
 1. Create the test method
 ```php
+/**
+ * @dataProvider providerTestAccessor
+ */
 public function testAccessor($attribute, $setValue, $getValue = AccessorTester::USE_SET_DATA)
 {
     $entity = new YourEntityClass();
@@ -173,9 +176,6 @@ public function testAccessor($attribute, $setValue, $getValue = AccessorTester::
 ```
 2. Create the data provider
 ```php
-/**
- * @dataProvider testAccessor
- */
 public function providerTestAccessor()
 {
     return [
